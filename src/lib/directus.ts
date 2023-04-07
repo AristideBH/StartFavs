@@ -25,6 +25,7 @@ async function getDirectusClient() {
                 'Unable to connect to the Directus instance. Make sure the .env file is present and the PUBLIC_DIRECTUS_URL variable is pointing the correct URL.'
             );
         }
+
     }
 
     return directus;
