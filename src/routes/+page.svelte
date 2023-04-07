@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { directusClient } from '$lib/directus';
+	import FavoriteCard from '$cpt/FavoriteCard.svelte';
 
 	const favorites = directusClient.items('favorites').readByQuery({
 		limit: -1,
@@ -21,10 +22,8 @@
 			<p>Il n'y a aucun contenu...</p>
 		{:else}
 			<div class="grid grid-cols-auto-fit-300 gap-4">
-				{#each value.data as { url, title }}
-					<a href="https://{url}" target="_blank">
-						<div class="card card-hover p-4">{title}</div>
-					</a>
+				{#each value.data as item}
+					<FavoriteCard {item} />
 				{/each}
 			</div>
 		{/if}

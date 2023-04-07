@@ -10,7 +10,7 @@
 
 {#key pathname}
 	<div
-		class="container mx-auto w-full {classesSlot} px-4 py-6 flex flex-col gap-4"
+		class="{classesSlot} flex flex-col gap-4 container mx-auto p-8 space-y-8"
 		in:fly={{ duration: speed, delay: speed, y: distance }}
 		out:fly={{ duration: speed, y: -distance }}
 	>

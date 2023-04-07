@@ -22,7 +22,7 @@
 	const cBase = 'card p-6 w-modal shadow-xl space-y-4';
 	const cHeader = 'text-2xl font-bold';
 	const cForm = 'space-y-4 rounded-container-token';
-	const cInput = 'input px-2 py-1 border border-surface-500/30';
+	const cInput = 'input px-3 py-2 border border-surface-500/30';
 </script>
 
 <!-- @component This example creates a simple form modal. -->

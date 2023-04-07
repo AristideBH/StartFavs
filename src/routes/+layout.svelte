@@ -48,9 +48,8 @@
 
 <AppShell
 	regionPage="relative"
-	slotHeader="border-b border-surface-500/30"
-	slotSidebarLeft="bg-surface-500/5 w-0 lg:w-64 border-r border-surface-500/30"
-	slotPageFooter="py-2 px-4 dark:bg-surface-800 bg-surface-100"
+	slotHeader="border-b border-surface-500/20"
+	slotSidebarLeft="bg-surface-500/5 w-0 lg:w-64 border-r border-surface-500/20"
 >
 	<svelte:fragment slot="header">
 		<AppBar>
@@ -82,6 +81,4 @@
 	<ContentTransition pathname={data.pathName}>
 		<slot />
 	</ContentTransition>
-
-	<svelte:fragment slot="pageFooter">Page Footer</svelte:fragment>
 </AppShell>
