@@ -5,8 +5,6 @@ const drawerOpen = (): void => {
         width: 'max-w-sm w-full'
     });
 }
-const drawerClose = (): void => {
-    drawerStore.close();
-}
+const drawerClose = (): void => drawerStore.close()
 
 export { drawerOpen, drawerClose }

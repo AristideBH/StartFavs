@@ -11,17 +11,20 @@
 		Modal,
 		LightSwitch,
 		type ModalComponent,
-		Toast
+		Toast,
+		dataTableHandler
 	} from '@skeletonlabs/skeleton';
 	import Navigation from '$cpt/Navigation.svelte';
 	import AddFavorite from '$src/lib/components/AddFavoriteButton.svelte';
 	import FavoriteForm from '$cpt/FavoriteForm.svelte';
+	import ContentTransition from '$cpt/ContentTransition.svelte';
 	import { drawerOpen } from '$lib/functions/menu';
+	import type { PageData } from './$types';
 
 	const modalComponentRegistry: Record<string, ModalComponent> = {
 		AddFavoriteModal: { ref: FavoriteForm }
 	};
-	$: classesSlot = $page.url.pathname === '/' ? '' : '';
+	export let data: PageData;
 </script>
 
 <Modal
@@ -37,14 +40,16 @@
 <Toast />
 
 <Drawer>
-	<h2 class="p-4">Navigation</h2>
+	<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+	<h2 class="p-4" tabindex="0">Navigation</h2>
 	<hr />
 	<Navigation />
 </Drawer>
 
 <AppShell
 	regionPage="relative"
-	slotSidebarLeft="bg-surface-500/5 w-0 lg:w-64"
+	slotHeader="border-b border-surface-500/30"
+	slotSidebarLeft="bg-surface-500/5 w-0 lg:w-64 border-r border-surface-500/30"
 	slotPageFooter="py-2 px-4 dark:bg-surface-800 bg-surface-100"
 >
 	<svelte:fragment slot="header">
@@ -74,9 +79,9 @@
 		<Navigation />
 	</svelte:fragment>
 
-	<div class="container mx-auto w-full {classesSlot} px-4 py-6 flex flex-col gap-4">
+	<ContentTransition pathname={data.pathName}>
 		<slot />
-	</div>
+	</ContentTransition>
 
 	<svelte:fragment slot="pageFooter">Page Footer</svelte:fragment>
 </AppShell>

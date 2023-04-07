@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { modalStore, toastStore, type ModalSettings } from '@skeletonlabs/skeleton';
-
 	import Icon from '@iconify/svelte';
 
 	const d: ModalSettings = {
@@ -23,9 +22,7 @@
 		}
 	};
 
-	const handleModalOpen = () => {
-		modalStore.trigger(d);
-	};
+	const handleModalOpen = () => modalStore.trigger(d);
 </script>
 
 <button
