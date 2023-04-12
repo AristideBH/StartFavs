@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { goto, invalidateAll } from '$app/navigation';
+
 	// Props
 	/** Exposes parent props to this component. */
 	export let parent: any;
@@ -16,6 +18,7 @@
 	function onFormSubmit(): void {
 		if ($modalStore[0].response) $modalStore[0].response(formData);
 		modalStore.close();
+		// invalidateAll();
 	}
 
 	// Base Classes

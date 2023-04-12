@@ -11,8 +11,7 @@
 		Modal,
 		LightSwitch,
 		type ModalComponent,
-		Toast,
-		dataTableHandler
+		Toast
 	} from '@skeletonlabs/skeleton';
 	import Navigation from '$cpt/Navigation.svelte';
 	import AddFavorite from '$src/lib/components/AddFavoriteButton.svelte';
@@ -25,6 +24,8 @@
 		AddFavoriteModal: { ref: FavoriteForm }
 	};
 	export let data: PageData;
+
+	$: ({ currentUser } = data);
 </script>
 
 <Modal
@@ -37,21 +38,22 @@
 <svelte:head>
 	<title>StartFavs - Your startpage bookmark manager</title>
 </svelte:head>
+
 <Toast />
 
 <Drawer>
 	<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 	<h2 class="p-4" tabindex="0">Navigation</h2>
 	<hr />
-	<Navigation />
+	<Navigation user={currentUser} />
 </Drawer>
 
 <AppShell
 	regionPage="relative"
-	slotHeader="border-b border-surface-500/20"
+	slotPageHeader="border-b border-surface-500/20"
 	slotSidebarLeft="bg-surface-500/5 w-0 lg:w-64 border-r border-surface-500/20"
 >
-	<svelte:fragment slot="header">
+	<svelte:fragment slot="pageHeader">
 		<AppBar>
 			<svelte:fragment slot="lead">
 				<div class="flex items-center">
@@ -75,7 +77,7 @@
 	</svelte:fragment>
 
 	<svelte:fragment slot="sidebarLeft">
-		<Navigation />
+		<Navigation user={data.currentUser} />
 	</svelte:fragment>
 
 	<ContentTransition pathname={data.pathName}>

@@ -2,15 +2,27 @@ import { Directus } from '@directus/sdk';
 import { PUBLIC_DIRECTUS_URL } from '$env/static/public';
 import type { MyCollections } from './types';
 
-const directus = new Directus<MyCollections>(PUBLIC_DIRECTUS_URL);
+
+const directus = new Directus<MyCollections>(PUBLIC_DIRECTUS_URL, {
+    auth: {
+        mode: 'json', // 'json' in Node.js
+        autoRefresh: true,
+        msRefreshBeforeExpires: 3000,
+        staticToken: '',
+    },
+    storage: {
+        prefix: 'yo',
+        mode: 'MemoryStorage', // 'MemoryStorage' in Node.js
+    }
+});
 
 const MAIL = import.meta.env.VITE_DIRECTUS_EMAIL;
 const PASS = import.meta.env.VITE_DIRECTUS_PASSWORD;
 const TOKEN = import.meta.env.VITE_DIRECTUS_TOKEN;
 
+
 async function getDirectusClient() {
     if (await directus.auth.token) return directus;
-
     try {
         if (MAIL && PASS) {
             await directus.auth.login({
@@ -26,12 +38,16 @@ async function getDirectusClient() {
                 'Unable to connect to the Directus instance. Make sure the .env file is present and the PUBLIC_DIRECTUS_URL variable is pointing the correct URL.'
             );
         }
-
     }
-
     return directus;
 }
 
 const directusClient = await getDirectusClient();
 
-export { directusClient, type MyCollections };
+const getImageUrl = (id: string) => {
+    return `${PUBLIC_DIRECTUS_URL}/assets/${id}`
+}
+
+export { directusClient, getImageUrl, type MyCollections };
+
+

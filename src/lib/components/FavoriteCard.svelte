@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { directusClient } from '$lib/directus';
+	import { directusClient, getImageUrl } from '$lib/directus';
 	import type { FavoritePost } from '$lib/types';
 	import Icon from '@iconify/svelte';
 	import { toastStore } from '@skeletonlabs/skeleton';
@@ -28,8 +28,11 @@
 	};
 </script>
 
-<a href="https://{item.url}" target="_blank" class="">
-	<div class="card card-hover p-4 w-full flex items-center">
+<a href="https://{item.url}" target="_blank" class=" bg-surface-100-800-token clip-round">
+	{#if item.thumbnail}
+		<img src={getImageUrl(item.thumbnail)} alt="" class="p-4 bg-surface-100-800-token" />
+	{/if}
+	<div class=" p-4 w-full flex items-center rounded-none">
 		<span class="grow">{item.title}</span>
 		<button class="btn variant-outline-primary" on:click|preventDefault={handleDelete}>
 			<Icon icon="ic:baseline-delete-outline" />

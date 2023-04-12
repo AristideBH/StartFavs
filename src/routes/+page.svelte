@@ -1,31 +1,24 @@
 <script lang="ts">
-	import { directusClient } from '$lib/directus';
+	import type { PageData } from './$types';
 	import FavoriteCard from '$cpt/FavoriteCard.svelte';
-
-	const favorites = directusClient.items('favorites').readByQuery({
-		limit: -1,
-		filter: {
-			status: {
-				_eq: 'published'
-			}
-		}
-	});
+	import Masonry from 'svelte-masonry/Masonry.svelte';
+	export let data: PageData;
 </script>
 
 <h1>Homepage</h1>
 
-{#await favorites}
+{#await data.favorites}
 	<!-- Manage your loading state here -->
 {:then value}
 	{#if value.data}
 		{#if value.data?.length < 1}
 			<p>Il n'y a aucun contenu...</p>
 		{:else}
-			<div class="grid grid-cols-auto-fit-300 gap-4">
+			<Masonry items={value.data}>
 				{#each value.data as item}
 					<FavoriteCard {item} />
 				{/each}
-			</div>
+			</Masonry>
 		{/if}
 	{/if}
 {:catch error}
