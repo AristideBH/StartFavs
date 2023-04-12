@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import FavoriteCard from '$cpt/FavoriteCard.svelte';
-	import Masonry from 'svelte-masonry/Masonry.svelte';
+	import Masonry from '$cpt/Masonry.svelte';
 	export let data: PageData;
 </script>
 
