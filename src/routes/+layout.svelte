@@ -45,7 +45,7 @@
 	<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 	<h2 class="p-4" tabindex="0">Navigation</h2>
 	<hr />
-	<Navigation user={currentUser} />
+	<Navigation />
 </Drawer>
 
 <AppShell
@@ -77,7 +77,7 @@
 	</svelte:fragment>
 
 	<svelte:fragment slot="sidebarLeft">
-		<Navigation user={data.currentUser} />
+		<Navigation />
 	</svelte:fragment>
 
 	<ContentTransition pathname={data.pathName}>
