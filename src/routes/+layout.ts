@@ -1,10 +1,15 @@
 import type { LayoutLoad } from './$types';
-import { directusClient } from '$lib/directus';
+// import { directusClient } from '$lib/directus';
+
+import { client } from '$src/lib/directus';
+import { readItems } from '@directus/sdk';
 
 export const load = (async ({ url }) => {
-    const currentUser = await directusClient.users.me.read();
+    // cornst currentUser = await directusClient.users.me.read();
+    const result = await client.request(readItems('Test'));
     return {
-        currentUser,
+        // currentUser,
+        result,
         pathName: url.pathname
     };
 }) satisfies LayoutLoad;

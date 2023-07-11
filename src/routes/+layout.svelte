@@ -14,26 +14,26 @@
 		Toast
 	} from '@skeletonlabs/skeleton';
 	import Navigation from '$cpt/Navigation.svelte';
-	import AddFavorite from '$src/lib/components/AddFavoriteButton.svelte';
+	// import AddFavorite from '$src/lib/components/AddFavoriteButton.svelte';
 	import FavoriteForm from '$cpt/FavoriteForm.svelte';
 	import ContentTransition from '$cpt/ContentTransition.svelte';
 	import { drawerOpen } from '$lib/functions/menu';
 	import type { PageData } from './$types';
 
 	const modalComponentRegistry: Record<string, ModalComponent> = {
-		AddFavoriteModal: { ref: FavoriteForm }
+		// AddFavoriteModal: { ref: FavoriteForm }
 	};
 	export let data: PageData;
 
 	// $: ({ currentUser } = data);
 </script>
 
-<Modal
+<!-- <Modal
 	width="w-modal-slim"
 	components={modalComponentRegistry}
 	buttonPositive="variant-filled-primary"
 	buttonNeutral="variant-ghost-primary"
-/>
+/> -->
 
 <svelte:head>
 	<title>StartFavs - Your startpage bookmark manager</title>
@@ -69,9 +69,10 @@
 					<strong class="text-xl tracking-wide">StartFavs</strong>
 				</div>
 			</svelte:fragment>
+
 			<svelte:fragment slot="trail">
 				<LightSwitch />
-				<AddFavorite />
+				<!-- <AddFavorite /> -->
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
@@ -80,8 +81,10 @@
 		<Navigation />
 	</svelte:fragment>
 
-	<ContentTransition pathname={data.pathName}>
-		<!-- <pre>{JSON.stringify(data, undefined, 2)}</pre> -->
+	<ContentTransition trigger={data.pathName}>
+		{#each data.result as item}
+			<pre>{JSON.stringify(item, undefined, 2)}</pre>
+		{/each}
 		<slot />
 	</ContentTransition>
 </AppShell>
