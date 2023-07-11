@@ -2,24 +2,19 @@ import { Directus } from '@directus/sdk';
 import { PUBLIC_DIRECTUS_URL } from '$env/static/public';
 import type { MyCollections } from './types';
 
-
-const directus = new Directus<MyCollections>(PUBLIC_DIRECTUS_URL, {
-    auth: {
-        mode: 'json', // 'json' in Node.js
-        autoRefresh: true,
-        msRefreshBeforeExpires: 3000,
-        staticToken: '',
-    },
-    storage: {
-        prefix: 'yo',
-        mode: 'MemoryStorage', // 'MemoryStorage' in Node.js
-    }
-});
+const directus = new Directus<MyCollections>(PUBLIC_DIRECTUS_URL,
+    {
+        auth: {
+            mode: 'json', // 'json' in Node.js
+            autoRefresh: true,
+            msRefreshBeforeExpires: 3000,
+            staticToken: '',
+        }
+    });
 
 const MAIL = import.meta.env.VITE_DIRECTUS_EMAIL;
 const PASS = import.meta.env.VITE_DIRECTUS_PASSWORD;
 const TOKEN = import.meta.env.VITE_DIRECTUS_TOKEN;
-
 
 async function getDirectusClient() {
     if (await directus.auth.token) return directus;
@@ -44,9 +39,7 @@ async function getDirectusClient() {
 
 const directusClient = await getDirectusClient();
 
-const getImageUrl = (id: string) => {
-    return `${PUBLIC_DIRECTUS_URL}/assets/${id}`
-}
+const getImageUrl = (id: string) => `${PUBLIC_DIRECTUS_URL}/assets/${id}`;
 
 export { directusClient, getImageUrl, type MyCollections };
 

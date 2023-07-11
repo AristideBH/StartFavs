@@ -1,4 +1,4 @@
-import type { ID, UserItem, UserType } from '@directus/sdk';
+import type { ID, UserItem, UserType, } from '@directus/sdk';
 
 
 type FavoritePost = {
@@ -9,7 +9,17 @@ type FavoritePost = {
     thumbnail: string
 };
 
+type TestCollec = {
+    id: ID,
+    status: string,
+    sort: string,
+    title: string,
+    blocks: JSON,
+
+}
+
 declare type MyCollections = {
     favorites: FavoritePost;
+    test: TestCollec
 };
 

@@ -3,24 +3,20 @@
 	import FavoriteCard from '$cpt/FavoriteCard.svelte';
 	import Masonry from '$cpt/Masonry.svelte';
 	export let data: PageData;
+
+	$: ({ tests } = data);
 </script>
 
 <h1>Homepage</h1>
 
-{#await data.favorites}
-	<!-- Manage your loading state here -->
+{#await tests}
+	<p>loading</p>
 {:then value}
+	<!-- <pre>{JSON.stringify(value, undefined, 2)}</pre> -->
 	{#if value.data}
-		{#if value.data?.length < 1}
-			<p>Il n'y a aucun contenu...</p>
-		{:else}
-			<Masonry items={value.data}>
-				{#each value.data as item}
-					<FavoriteCard {item} />
-				{/each}
-			</Masonry>
-		{/if}
+		{#each value.data as item}
+			<pre>{JSON.stringify(item, undefined, 2)}</pre>
+			<!-- content here -->
+		{/each}
 	{/if}
-{:catch error}
-	<!-- If request has failed, {error} is accessible here -->
 {/await}

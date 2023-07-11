@@ -25,7 +25,7 @@
 	};
 	export let data: PageData;
 
-	$: ({ currentUser } = data);
+	// $: ({ currentUser } = data);
 </script>
 
 <Modal
@@ -81,6 +81,7 @@
 	</svelte:fragment>
 
 	<ContentTransition pathname={data.pathName}>
+		<!-- <pre>{JSON.stringify(data, undefined, 2)}</pre> -->
 		<slot />
 	</ContentTransition>
 </AppShell>
